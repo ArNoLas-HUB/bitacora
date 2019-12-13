@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::resource('docente', 'docenteController');
-Route::resource('materia', 'MateriaController');
-Route::resource('reportes', 'ReportesController');
-Route::resource('horario', 'HorarioController');
-Route::resource('bitacora', 'BitacoraController');
-Auth::routes();
+Route::resource('docente', 'docenteController')->middleware('auth');
+Route::resource('materia', 'MateriaController')->middleware('auth');
+Route::resource('reportes', 'ReportesController')->middleware('auth');
+Route::resource('horario', 'HorarioController')->middleware('auth');
+Route::resource('bitacora', 'BitacoraController')->middleware('auth');
+Auth::routes(['reset'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
